@@ -1,0 +1,83 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+html, body {
+    color: #444;
+	font-size: 16px;
+}
+
+h1, h2 {
+	color: #084775;
+	font-size: 2rem;
+	margin-top: 2rem;
+	margin-bottom: 1rem;
+}
+
+.wrapper {
+	position: absolute;
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	height: 100%;
+}
+.wrapper .header {
+	display: flex;
+	width: 100%;
+	height: 15rem;
+	background-color: #dcf0ff;
+	border-bottom: 0.25rem #084775 solid;
+	color: #084775;
+	align-items: center;
+	text-align: center;
+}
+.wrapper .header h1 {
+	width: 100%;
+	font-size: 5rem;
+}
+.wrapper .content {
+	display: flex;
+	flex: 1;
+	margin-left: 1rem;
+}
+.wrapper .content .nav {
+	flex: 1;
+}
+.wrapper .content .text {
+	flex: 4;
+	overflow-y: scroll;
+}
+.wrapper .footer {
+	display: flex;
+	width: 100%;
+	height: 2.5rem;
+	background-color: #dcf0ff;
+	border-top: 0.25rem #084775 solid;
+	color: #084775;
+	align-items: center;
+	text-align: center;
+}
+.wrapper .footer div {
+	width: 100%;
+}
+
+/* TOC */
+.toc .toctoggle {
+	display: none;
+}
+.toc ul {
+	list-style-type: none;
+}
+.toc ul li {
+	list-style-type: none;
+}
+.toc ul li a {
+	display: block;
+	padding: 0 30px;
+	text-decoration: none;
+	color : #084775;
+}
+.toc ul li .tocnumber {
+	color : #084775;
+}

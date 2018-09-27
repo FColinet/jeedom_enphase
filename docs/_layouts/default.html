@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="{{ site.lang | default: "en-US" }}">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="theme-color" content="#78aac8">
+    <link rel="stylesheet" href="/{{site.github.project_title}}/assets/css/styles.css">
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="header">
+        <h1 class="project-name"></h1>
+      </div>
+      <div class="content">
+        <div class="nav">
+        </div>
+        <div class="text">
+          {{ content }}
+        </div>
+      </div>
+      <div class="footer">
+        <div>
+          {% if site.github.is_project_page %}
+            <span class="site-footer-owner"><a href="{{ site.github.repository_url }}">{{ site.github.repository_name }}</a> est maintenu par <a href="{{ site.github.owner_url }}">{{ site.github.owner_name }}</a>.</span>
+          {% endif %}
+          <span class="site-footer-credits">Cette page a été générée par <a href="https://pages.github.com">GitHub Pages</a>.</span>
+        </div>
+      </div>
+    </div>
+
+    <script src="/{{site.github.project_title}}/assets/js/jquery-2.1.1.min.js"></script>
+    <script src="/{{site.github.project_title}}/assets/js/jquery.toc.js"></script>
+    <script>
+      (function() {
+        document.onreadystatechange = function () {
+          if (document.readyState == "complete") {
+
+            var title = '{{site.github.project_title}}'.replace('jeedom_', '');
+            title = title[0].toUpperCase() + title.substring(1);
+            document.title = title;
+            document.querySelector(".project-name").innerHTML = title;
+
+            window.addEventListener("orientationchange", function() {
+              init();
+            });
+            window.addEventListener("resize", function() {
+              init();
+            });
+
+            function init() {
+              document.querySelector('.nav').innerHTML = '';
+
+              $('.text').toc({
+                renderIn : ".nav",
+                selectors : 'h1,h2'
+              });
+            }
+
+            init();
+
+            var i = 1, j = 1;
+            $('h1, h2', $('.content')).each(function() {
+              if($(this)[0].tagName.toLowerCase() == 'h1') {
+                $('#' + $(this).attr('id')).text(i + ') ' + $(this).text());
+                i++;
+              }
+              if($(this)[0].tagName.toLowerCase() == 'h2') {
+                $('#' + $(this).attr('id')).text((i-1) + '.' + j + ') ' + $(this).text());
+                j++;
+              } else {
+                j = 1;
+              }
+            });
+
+          }
+        }
+      })();
+    </script>
+  </body>
+</html>

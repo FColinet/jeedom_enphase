@@ -1,0 +1,14 @@
+{
+	"id" : "enphase",
+	"name" : "Enphase",
+	"description" : "Permet de se connecter à la gestion des panneaux solaires Enphase",
+	"licence" : "AGPL",
+	"author" : "kahowane",
+	"require" : "3.0",
+	"category" : "energy",
+	"hasDependency" : false,
+	"hasOwnDeamon" : false,
+	"maxDependancyInstallTime" : 0,
+	"changelog" : "",
+	"documentation" : "https://fcolinet.github.io/jeedom_enphase"
+}
