@@ -59,9 +59,15 @@ h1, h2 {
 	text-align: center;
 }
 .wrapper .footer div {
+	display: flex;
+    align-items: center;
+    justify-content: center;
 	width: 100%;
 }
-
+.wrapper .footer div .site-footer-don {
+	display: flex;
+    align-items: center;
+}
 .wrapper .footer div .site-footer-don img {
 	height: 2rem;
 }
