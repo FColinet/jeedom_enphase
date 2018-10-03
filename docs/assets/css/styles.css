@@ -62,6 +62,10 @@ h1, h2 {
 	width: 100%;
 }
 
+.wrapper .footer div .site-footer-don img {
+	height: 2rem;
+}
+
 /* TOC */
 .toc .toctoggle {
 	display: none;
