@@ -66,7 +66,7 @@ foreach ($eqLogics as $eqLogic) {
 							<label class="col-sm-3 control-label">{{Nom du champ photovoltaïque}}</label>
 							<div class="col-sm-3">
 								<input type="text" class="eqLogicAttr form-control" data-l1key="id" style="display : none;" />
-								<input type="text" class="eqLogicAttr form-control" data-l1key="name" placeholder="{{Nom de l'équipement IFTTT}}"/>
+								<input type="text" class="eqLogicAttr form-control" data-l1key="name" placeholder="{{Nom de l'équipement}}"/>
 							</div>
 						</div>
 						<div class="form-group">

@@ -151,45 +151,43 @@ class enphase extends eqLogic {
 
 		$json_data = json_decode($response, true);
 
-      	$this->formatWattHours('now', $json_data['wattsNow']);
-      	$this->formatWattHours('daily', $json_data['wattHoursToday']);
-      	$this->formatWattHours('lifetime', $json_data['wattHoursLifetime']);
+		$this->formatWattHours('now', $json_data['wattsNow']);
+		$this->formatWattHours('daily', $json_data['wattHoursToday']);
+		$this->formatWattHours('lifetime', $json_data['wattHoursLifetime']);
 	}
 
 	private function formatWattHours($key, $value) {
+		$unit = array(
+			0 => '',
+			3 => 'k',
+			6 => 'M',
+			9 => 'G',
+			12 => 'T',
+			15 => 'P',
+			18 => 'E',
+			21 => 'Z',
+			24 => 'Y',
+		);
+
+		for ($u=0; $u<=24; $u+=3) {
+			$result = $value / pow(10, $u);
+
+			if (!isset($best) || ($result >= 1 && $result < $best['converted'])) {
+				$best = array(
+					'initial' => $value,
+					'converted' => $result,
+					'rounded' => round($result, 2),
+					'prefixUnit' => $unit[$u],
+				);
+			}
+		}
+
+		$wattHours = $best['rounded'];
 		$enphaseCmd = $this->getCmd(null, $key);
-      	$length = strlen($value);
-
-      	$wattHours = 0;
-
-      	switch ($length) {
-			case 1:
-			case 2:
-			case 3:
-            	$wattHours = $value;
-				$enphaseCmd->setUnite('Wh');
-            	break;
-			case 4:
-			case 5:
-			case 6:
-            	$wattHours = $value / pow(10, 3);
-				$enphaseCmd->setUnite('kWh');
-            	break;
-			case 7:
-			case 8:
-			case 9:
-            	$wattHours = $value / pow(10, 6);
-				$enphaseCmd->setUnite('MWh');
-            	break;
-			default:
-            	$wattHours = $value / pow(10, 9);
-				$enphaseCmd->setUnite('GWh');
-            	break;
-        }
-
-      	$enphaseCmd->save();
-      	$this->checkAndUpdateCmd($key, $wattHours);
-    }
+		$enphaseCmd->setUnite($best['prefixUnit'].'Wh');
+		$enphaseCmd->save();
+		$this->checkAndUpdateCmd($key, $wattHours);
+	}
 }
 
 class enphaseCmd extends cmd {

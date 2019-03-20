@@ -1,7 +1,7 @@
 {
 	"id" : "enphase",
 	"name" : "Enphase",
-	"description" : "Permet de se connecter à la gestion des panneaux solaires Enphase",
+	"description" : "Permet de se connecter à une passerelle Enphase",
 	"licence" : "AGPL",
 	"author" : "kahowane",
 	"require" : "3.0",

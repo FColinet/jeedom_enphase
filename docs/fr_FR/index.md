@@ -23,7 +23,7 @@ Création d'un équipement
 
 ![enphase](../images/equipement.png)
 
-Renseignez les données habituelles (nom, parent, ...). Ensuite, saisissez l'adresse IP locale de la passerelle Enphase, l'identifiant et le mot de passe.
+Renseignez les données habituelles (nom, parent, ...). Ensuite, saisissez l'adresse IP **locale** de la passerelle Enphase, l'identifiant et le mot de passe.
 
 Commandes
 =========
