@@ -9,6 +9,6 @@
 	"hasDependency" : false,
 	"hasOwnDeamon" : false,
 	"maxDependancyInstallTime" : 0,
-	"changelog" : "",
+	"changelog" : "https://github.com/kahowane/jeedom_enphase/commits/master",
 	"documentation" : "https://kahowane.github.io/jeedom_enphase"
 }
