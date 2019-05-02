@@ -1,0 +1,33 @@
+<div class="eqLogic-widget eqLogic allowResize" style="width:#width#;height:#height#;border:#border#;border-radius:#border-radius#;background-color: #background-color#;color: #color#;#style#" data-cmd_uid="#uid#" data-eqLogic_id="#id#" data-eqLogic_uid="#uid#" data-version="#version#">
+  <style>
+    .enphase_flex {
+      display: flex;
+    }
+    .enphase_flex_same_width {
+      flex: 1 0 0px;
+    }
+    .enphase_flex_same_width > div {
+      text-align: center;
+    }
+    .enphase_flex_same_width > div:first-of-type {
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+  </style>
+  <center class="widget-name">
+    <a href="#eqLink#" style="font-size : 1.1em;#hideEqLogicName#">#name_display# <span style="font-size: 0.85em;position: relative;top:-2px;">#object_name#</span></a>
+  </center>
+  <div class="enphase_flex">
+      <div class="enphase_flex_same_width">
+        <div>Instantané</div>
+        <div class="cmd tooltips cmd-widget cursor container-fluid history" data-type="info" data-subtype="numeric" data-cmd_id="#nowid#" data-eqlogic_id="#id#">#now#</div>
+      </div>
+      <div class="enphase_flex_same_width">
+        <div>Journalier</div>
+        <div data-type="info" data-subtype="numeric" data-cmd_id="#dailyid#" data-eqlogic_id="#id#">#daily#</div>
+      </div>
+      <div class="enphase_flex_same_width">
+        <div>Cumulé</div>
+        <div data-type="info" data-subtype="numeric" data-cmd_id="#lifetimeid#" data-eqlogic_id="#id#">#lifetime#</div>
+      </div>
+  </div>
+</div>

@@ -65,6 +65,7 @@ class enphase extends eqLogic {
 		$enphaseCmd->setLogicalId('now');
 		$enphaseCmd->setEqLogic_id($this->getId());
 		$enphaseCmd->setIsHistorized(1);
+		$enphaseCmd->setConfiguration('maxValue', $this->getConfiguration('maxP'));
 		$enphaseCmd->setUnite('Wh');
 		$enphaseCmd->setType('info');
 		$enphaseCmd->setSubType('numeric');
@@ -119,10 +120,30 @@ class enphase extends eqLogic {
 	}
 
 	/* Non obligatoire mais permet de modifier l'affichage du widget si vous en avez besoin */
-	/*
 	public function toHtml($_version = 'dashboard') {
+		$replace = $this->preToHtml($_version);
+		if (!is_array($replace)) {
+				return $replace;
+		}
+		$version = jeedom::versionAlias($_version);
+
+		$now = $this->getCmd(null, 'now');
+		$replace['#now#'] = is_object($now) ? $this->formatWattHours($now->execCmd()) : '';
+		$replace['#nowid#'] = is_object($now) ? $now->getId() : '';
+		$replace['#nowuid#'] = is_object($now) ? $now->getId() : '';
+
+		$daily = $this->getCmd(null, 'daily');
+		$replace['#daily#'] = is_object($daily) ? $this->formatWattHours($daily->execCmd()) : '';
+		$replace['#dailyid#'] = is_object($daily) ? $daily->getId() : '';
+
+		$lifetime = $this->getCmd(null, 'lifetime');
+		$replace['#lifetime#'] = is_object($lifetime) ? $this->formatWattHours($lifetime->execCmd()) : '';
+		$replace['#lifetimeid#'] = is_object($lifetime) ? $lifetime->getId() : '';
+		
+		$html = template_replace($replace, getTemplate('core', $version, 'widget', 'enphase'));
+		cache::set('widgetHtml' . $_version . $this->getId(), $html, 0);
+		return $html;
 	}
-	*/
 
 	/* Non obligatoire mais ca permet de déclencher une action après modification de variable de configuration */
 	/*
@@ -151,12 +172,16 @@ class enphase extends eqLogic {
 
 		$json_data = json_decode($response, true);
 
-		$this->formatWattHours('now', $json_data['wattsNow']);
-		$this->formatWattHours('daily', $json_data['wattHoursToday']);
-		$this->formatWattHours('lifetime', $json_data['wattHoursLifetime']);
+		$this->updateWattHours('now', $json_data['wattsNow']);
+		$this->updateWattHours('daily', $json_data['wattHoursToday']);
+		$this->updateWattHours('lifetime', $json_data['wattHoursLifetime']);
 	}
 
-	private function formatWattHours($key, $value) {
+	private function updateWattHours($key, $value) {
+		$this->checkAndUpdateCmd($key, $value);
+	}
+
+	private function formatWattHours($value) {
 		$unit = array(
 			0 => '',
 			3 => 'k',
@@ -183,10 +208,8 @@ class enphase extends eqLogic {
 		}
 
 		$wattHours = $best['rounded'];
-		$enphaseCmd = $this->getCmd(null, $key);
-		$enphaseCmd->setUnite($best['prefixUnit'].'Wh');
-		$enphaseCmd->save();
-		$this->checkAndUpdateCmd($key, $wattHours);
+
+		return $wattHours . ' ' . $best['prefixUnit'].'Wh';
 	}
 }
 

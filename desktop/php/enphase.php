@@ -119,6 +119,12 @@ foreach (jeedom::getConfiguration('eqLogic:category') as $key => $value) {
 								<input type="password" class="eqLogicAttr configuration form-control" data-l1key="configuration" data-l2key="pass" placeholder="6 derniers chiffres du numéro de série" />
 							</div>
 						</div>
+						<div class="form-group">
+							<label class="col-sm-3 control-label">{{Puissance max de production}}</label>
+							<div class="col-sm-3">
+								<input type="maxP" class="eqLogicAttr configuration form-control" data-l1key="configuration" data-l2key="maxP" placeholder="Puissance en Watt" />
+							</div>
+						</div>
 					</fieldset>
 				</form>
 			</div>
